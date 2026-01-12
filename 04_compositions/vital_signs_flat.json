@@ -1,0 +1,23 @@
+{
+  "vital_signs.v0/category|terminology": "openehr",
+  "vital_signs.v0/category|value": "event",
+  "vital_signs.v0/category|code": "433",
+  "vital_signs.v0/context/start_time": "2026-01-05T02:00:00Z",
+  "vital_signs.v0/context/setting|code": "225",
+  "vital_signs.v0/context/setting|value": "home",
+  "vital_signs.v0/context/setting|terminology": "openehr",
+  "vital_signs.v0/context/_health_care_facility|name": "DOE, John",
+  "vital_signs.v0/pulse_heart_beat/any_event/rate|magnitude": 76.0,
+  "vital_signs.v0/pulse_heart_beat/any_event/rate|unit": "/min",
+  "vital_signs.v0/pulse_heart_beat/any_event/time": "2026-01-05T02:00:00Z",
+  "vital_signs.v0/blood_pressure/any_event/systolic|magnitude": 120.0,
+  "vital_signs.v0/blood_pressure/any_event/systolic|unit": "mm[Hg]",
+  "vital_signs.v0/blood_pressure/any_event/diastolic|magnitude": 80.0,
+  "vital_signs.v0/blood_pressure/any_event/diastolic|unit": "mm[Hg]",
+  "vital_signs.v0/blood_pressure/any_event/time": "2026-01-05T02:00:00Z",
+  "vital_signs.v0/language|code": "en",
+  "vital_signs.v0/language|terminology": "ISO_639-1",
+  "vital_signs.v0/territory|code": "US",
+  "vital_signs.v0/territory|terminology": "ISO_3166-1",
+  "vital_signs.v0/composer|name": "Test User"
+}
