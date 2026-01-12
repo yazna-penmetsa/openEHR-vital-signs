@@ -1,0 +1,12 @@
+SELECT
+  c/uid/value AS comp_uid,
+  o/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude AS pulse_rate,
+  bp/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude AS sys_bp,
+  bp/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude AS dia_bp
+FROM EHR e
+CONTAINS COMPOSITION c
+CONTAINS (
+  OBSERVATION o[openEHR-EHR-OBSERVATION.pulse.v2]
+  AND OBSERVATION bp[openEHR-EHR-OBSERVATION.blood_pressure.v2]
+)
+WHERE e/ehr_id/value = '<EHR_ID>'
