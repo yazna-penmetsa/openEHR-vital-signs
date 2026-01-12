@@ -1,0 +1,4 @@
+SELECT c/uid/value, c/context/start_time/value
+FROM EHR e
+CONTAINS COMPOSITION c
+WHERE e/ehr_id/value = '<EHR_ID>'
