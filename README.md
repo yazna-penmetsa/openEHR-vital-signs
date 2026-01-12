@@ -1,46 +1,114 @@
-# openEHR Vital Signs 
+# openEHR Vital Signs Project  
+(EHRbase · Templates · Postman · AQL)
 
-This repository documents my end-to-end learning and implementation of openEHR concepts.
+This repository contains an end-to-end **openEHR Vital Signs implementation** built using **EHRbase**, **custom openEHR templates**, **Postman**, and **AQL (Archetype Query Language)**.
 
-The project covers:
-- Understanding openEHR fundamentals
-- Setting up EHRbase using Docker
-- Designing archetype-based templates
-- Posting clinical data using FLAT JSON
-- Querying data using AQL (Archetype Query Language)
+The project demonstrates how structured clinical data is modeled, stored, retrieved, and queried in an openEHR-based system, following real-world healthcare data standards.
 
 ---
 
-## What Does openEHR Solve?
-openEHR separates clinical knowledge from software by using standardized archetypes and templates.
-This allows systems to evolve clinically without changing application code.
+## Project Goal
+
+The goal of this project was to build a complete **Vital Signs clinical workflow** using openEHR, covering:
+
+- Template-based clinical data modeling  
+- Backend deployment using EHRbase  
+- Posting clinical data as openEHR compositions  
+- Querying stored data using AQL  
+
+This mirrors how modern EHR systems manage structured clinical information.
 
 ---
 
-## What I Built
-A Vital Signs clinical workflow including:
-- Pulse / Heart Rate
-- Blood Pressure (Systolic & Diastolic)
-- Stored as openEHR compositions
-- Retrieved using AQL queries
+## Clinical Scope
+
+The project models and manages the following **Vital Signs**:
+
+- **Pulse / Heart Rate**
+- **Blood Pressure**
+  - Systolic
+  - Diastolic
+
+These observations are defined using openEHR archetypes and combined into a single **Vital Signs template**.
 
 ---
 
-## Project Structure
-| Folder | Purpose |
-|------|--------|
-| `01_concepts` | openEHR theory and architecture |
-| `02_setup` | Docker & Postman setup |
-| `03_templates` | Template creation and upload |
-| `04_compositions` | Posting clinical data |
-| `05_queries` | Querying data using AQL |
-| `screenshots` | Proof of execution |
+## Technology Stack
+
+- openEHR  
+- EHRbase (Dockerized openEHR backend)  
+- Archetype Designer  
+- Postman  
+- AQL (Archetype Query Language)  
+- Docker  
 
 ---
 
-## Technologies Used
-- openEHR
-- EHRbase
-- Docker
-- Postman
-- AQL (Archetype Query Language)
+## Repository Structure
+
+openEHR-vital-signs/
+│
+├── 01_concepts/
+├── 02_setup/
+├── 03_templates/
+├── 04_compositions/
+├── 05_queries/
+└── screenshots/
+
+
+---
+
+## Implementation Workflow
+
+### 1. EHRbase Deployment
+
+EHRbase was deployed locally using Docker and verified through its REST API.
+
+![EHRbase Running](screenshots/Screenshot 2026-01-12 151038.png)
+
+---
+
+### 2. Vital Signs Template Creation
+
+A reusable **Vital Signs template** was created using Archetype Designer by assembling pulse and blood pressure archetypes and uploaded to EHRbase.
+
+![Template Upload](screenshots/Screenshot 2026-01-12 151106.png)
+
+---
+
+### 3. Posting a Vital Signs Composition
+
+Clinical data was posted to EHRbase as an openEHR **COMPOSITION** using the **FLAT JSON format**.
+
+A successful POST returned:
+
+
+![Composition POST Success](screenshots/Screenshot 2026-01-12 151123.png)
+
+---
+
+### 4. Composition Retrieval (FLAT)
+
+The stored composition was retrieved in FLAT format to verify that pulse and blood pressure values were correctly persisted.
+
+![FLAT Composition Output](screenshots/Screenshot 2026-01-12 151151.png)
+
+---
+
+### 5. Querying Data Using AQL
+
+AQL (Archetype Query Language) was used to query structured clinical data stored in EHRbase.
+
+```sql
+SELECT
+  c/uid/value AS comp_uid,
+  o/data[at0002]/events[at0003]/data[at0001]/items[at0004]/value/magnitude AS pulse_rate,
+  bp/data[at0001]/events[at0006]/data[at0003]/items[at0004]/value/magnitude AS systolic_bp,
+  bp/data[at0001]/events[at0006]/data[at0003]/items[at0005]/value/magnitude AS diastolic_bp
+FROM EHR e
+CONTAINS COMPOSITION c
+CONTAINS (
+  OBSERVATION o[openEHR-EHR-OBSERVATION.pulse.v2]
+  AND OBSERVATION bp[openEHR-EHR-OBSERVATION.blood_pressure.v2]
+)
+WHERE e/ehr_id/value = '<EHR_ID>'
