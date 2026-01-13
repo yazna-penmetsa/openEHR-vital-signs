@@ -124,7 +124,7 @@ Multiple compositions were created and verified using AQL queries.
 
 ![Final Verification](screenshots/Screenshot 2026-01-12 152120.png)
 
-### Key Outcomes
+**Key Outcomes**
 
 Implemented a complete openEHR-based Vital Signs workflow
 
@@ -134,7 +134,7 @@ Stored structured clinical data using openEHR compositions
 
 Queried clinical data using AQL
 
-### Notes
+**Notes**
 
 No patient-identifiable data is included
 
@@ -144,14 +144,3 @@ AQL queries are read-only
 
 
 ---
-
-## ✅ That is it. Nothing else.
-
-You do **NOT** paste multiple things.  
-You do **NOT** combine blocks.  
-You do **NOT** choose between versions.
-
-👉 **Just paste that one block once.**
-
-If you want, after you commit it, send me a message like:  
-**“README updated”** and I’ll confirm it’s correct.
